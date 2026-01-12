@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-agp%+xpk7b2q#3@idh!g^8d5_i*7q*$_97+4ioeb5w8x)c61$b
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ["*", ".onrender.com"]
 
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 
