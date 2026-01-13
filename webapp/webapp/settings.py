@@ -6,20 +6,24 @@ Compatible con Render + Gunicorn + WhiteNoise
 from pathlib import Path
 import os
 
+# =========================
 # BASE DIR
+# =========================
 BASE_DIR = Path(__file__).resolve().parent.parent
+
 
 # =========================
 # SEGURIDAD
 # =========================
 SECRET_KEY = os.environ.get(
     "SECRET_KEY",
-    "django-insecure-temporal-solo-para-despliegue"
+    "django-insecure-temporal-solo-para-desarrollo"
 )
 
 DEBUG = False
 
-ALLOWED_HOSTS = ["*"]
+ALLOWED_HOSTS = ["*", ".onrender.com"]
+
 
 # =========================
 # APLICACIONES
@@ -36,6 +40,7 @@ INSTALLED_APPS = [
     'inicio',
 ]
 
+
 # =========================
 # MIDDLEWARE
 # =========================
@@ -50,6 +55,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
 
 # =========================
 # URLS / WSGI
@@ -74,6 +80,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'webapp.wsgi.application'
 
+
 # =========================
 # BASE DE DATOS
 # =========================
@@ -84,23 +91,36 @@ DATABASES = {
     }
 }
 
+
 # =========================
 # VALIDADORES
 # =========================
 AUTH_PASSWORD_VALIDATORS = [
-    {'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator'},
-    {'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator'},
-    {'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator'},
-    {'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator'},
+    {
+        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
+    },
+    {
+        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+    },
+    {
+        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
+    },
+    {
+        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
+    },
 ]
+
 
 # =========================
 # INTERNACIONALIZACIÓN
 # =========================
 LANGUAGE_CODE = 'es-mx'
+
 TIME_ZONE = 'UTC'
+
 USE_I18N = True
 USE_TZ = True
+
 
 # =========================
 # ARCHIVOS ESTÁTICOS
@@ -108,7 +128,10 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+STATICFILES_STORAGE = (
+    'whitenoise.storage.CompressedManifestStaticFilesStorage'
+)
+
 
 # =========================
 # DEFAULT
