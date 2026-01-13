@@ -1,6 +1,6 @@
 """
 Django settings for webapp project.
-Compatible con Render + Gunicorn + WhiteNoise
+Configurado para Render + Gunicorn
 """
 
 from pathlib import Path
@@ -11,19 +11,21 @@ import os
 # =========================
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
 # =========================
 # SEGURIDAD
 # =========================
 SECRET_KEY = os.environ.get(
     "SECRET_KEY",
-    "django-insecure-temporal-solo-para-desarrollo"
+    "django-insecure-temporal-solo-para-render"
 )
 
 DEBUG = False
 
-ALLOWED_HOSTS = ["*", ".onrender.com"]
-
+ALLOWED_HOSTS = [
+    "localhost",
+    "127.0.0.1",
+    ".onrender.com",
+]
 
 # =========================
 # APLICACIONES
@@ -36,19 +38,15 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-    # Apps locales
-    
+    # App local
     'inicio',
 ]
-
 
 # =========================
 # MIDDLEWARE
 # =========================
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',
-
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -57,12 +55,16 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-
 # =========================
 # URLS / WSGI
 # =========================
 ROOT_URLCONF = 'webapp.urls'
 
+WSGI_APPLICATION = 'webapp.wsgi.application'
+
+# =========================
+# TEMPLATES
+# =========================
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -79,9 +81,6 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'webapp.wsgi.application'
-
-
 # =========================
 # BASE DE DATOS
 # =========================
@@ -92,47 +91,29 @@ DATABASES = {
     }
 }
 
-
 # =========================
 # VALIDADORES
 # =========================
 AUTH_PASSWORD_VALIDATORS = [
-    {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
-    },
+    {'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator'},
+    {'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator'},
+    {'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator'},
+    {'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator'},
 ]
-
 
 # =========================
 # INTERNACIONALIZACIÓN
 # =========================
 LANGUAGE_CODE = 'es-mx'
-
 TIME_ZONE = 'UTC'
-
 USE_I18N = True
 USE_TZ = True
-
 
 # =========================
 # ARCHIVOS ESTÁTICOS
 # =========================
 STATIC_URL = '/static/'
 STATIC_ROOT = BASE_DIR / 'staticfiles'
-
-STATICFILES_STORAGE = (
-    'whitenoise.storage.CompressedManifestStaticFilesStorage'
-)
-
 
 # =========================
 # DEFAULT
