@@ -19,7 +19,7 @@ SECRET_KEY = os.environ.get(
     "django-insecure-temporal-solo-para-render"
 )
 
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = [
     "localhost",

@@ -9,6 +9,6 @@ https://docs.djangoproject.com/en/6.0/howto/deployment/wsgi/
 import os
 from django.core.wsgi import get_wsgi_application
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'settings')
-
+# MISMO valor que en manage.py:
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'django_paas.settings')
 application = get_wsgi_application()
